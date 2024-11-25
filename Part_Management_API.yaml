@@ -1,0 +1,85 @@
+openapi: 3.0.0
+info:
+  title: Part Management API
+  version: 1.0.0
+paths:
+  /api/v1/parts:
+    get:
+      summary: List parts
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: manufacturerId
+          in: query
+          schema:
+            type: string
+        - name: page
+          in: query
+          schema:
+            type: integer
+        - name: size
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Part'
+    post:
+      summary: Create new part
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartCreationRequest'
+      responses:
+        '201':
+          description: Part created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Part'
+                
+  /api/v1/parts/{serialNumber}:
+    get:
+      summary: Get part details
+      parameters:
+        - name: serialNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Part'
+    
+    put:
+      summary: Update part status
+      parameters:
+        - name: serialNumber
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PartUpdateRequest'
+      responses:
+        '200':
+          description: Part updated
+

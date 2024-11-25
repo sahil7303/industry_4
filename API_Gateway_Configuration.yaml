@@ -1,0 +1,31 @@
+### 6.2 ### 6.2 API Gateway Configuration
+
+```yaml
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: part-service
+          uri: lb://part-service
+          predicates:
+            - Path=/api/v1/parts/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: partServiceCircuitBreaker
+                fallbackUri: forward:/fallback
+            - name: RateLimiter
+              args:
+                redis-rate-limiter.replenishRate: 10
+                redis-rate-limiter.burstCapacity: 20
+            
+        - id: assembly-service
+          uri: lb://assembly-service
+          predicates:
+            - Path=/api/v1/assemblies/**
+          filters:
+            - name: CircuitBreaker
+              args:
+                name: assemblyServiceCircuitBreaker
+                fallbackUri: forward:/fallback
+

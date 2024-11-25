@@ -1,0 +1,25 @@
+Microservices Framework:
+  - Spring Boot 3.2
+  - Spring Cloud Gateway
+  - Spring Security
+  - Spring Data JPA
+  - Spring Cache
+
+Runtime Environment:
+  - JDK 21
+  - Node.js 20 LTS (for supporting services)
+  - Docker containers
+  - Kubernetes orchestration
+
+Database Layer:
+  primary: PostgreSQL 16
+  cache: Redis 7.2
+  search: Elasticsearch 8.11
+  messageQueue: Apache Kafka 3.6
+
+Monitoring Stack:
+  metrics: Prometheus
+  visualization: Grafana
+  logging: ELK Stack
+  tracing: Jaeger
+  alerts: AlertManager
